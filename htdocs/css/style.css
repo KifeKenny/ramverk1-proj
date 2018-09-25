@@ -1,0 +1,264 @@
+html {
+    overflow-y: scroll;
+}
+
+footer {
+  background-color: black;
+  color: green;
+  padding: 45px;
+  background: url('../img/side.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 200px;
+   /* <img class="right" src="../htdocs/img/side.jpg" style="height: 100px; width: 50%;"> */
+}
+
+p, h1 {
+    color: white;
+}
+
+input[type=text], select, input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: black;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+legend {
+    color: white;
+}
+
+output {
+    color: white;
+}
+
+.jag {
+    width: 199px;
+    height: 197px;
+    margin-left: 1%;
+    transform: rotate(90deg);
+}
+
+.notjag {
+    height: 200px;
+    width: 200px;
+    margin-left: 1%;
+}
+
+.pumpkingImg {
+    height: 50px;
+    width: 70px;
+}
+
+.zero {
+    padding: 0;
+}
+
+.editText {
+    height: 200px;
+    width: 100%;
+}
+
+.commentBorder {
+    border: 1px solid black;
+    padding: 1%;
+    margin: 1%;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.large {
+    font-size: large;
+}
+
+.widgetAddon {
+    border: 1px solid black;
+}
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}
+
+.popUpmes {
+    padding: 8px;
+    color: #fff;
+    opacity: .83;
+    transition: opacity .6s;
+    margin-bottom: 15px;
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  background-color: black;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+    min-height: 550px;
+    background-color: black;
+}
+
+.col-sm-8 {
+    min-height: 1000px;
+    background-color: black;
+}
+
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: black;
+    height: 100%;
+    min-height: 550px;
+}
+
+.widget {
+    width: 98.0%;
+    height: 50px;
+    margin: 0 1.0% 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: auto;
+
+}
+
+.widget2 {
+    width: 98.0%;
+    min-height: 50px;
+    margin: 0 1.0% 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: auto;
+    background-color: green;
+}
+
+.question {
+    width: 100%;
+    border: 1px solid white;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    height: 200px;
+}
+
+.titleQuestion {
+    overflow: auto;
+    border-bottom: 1px solid white;
+    margin-bottom: 5px;
+}
+
+.tagUnder {
+    float: left;
+    background-color: #e0dbd2;
+    color: black;
+    border-radius: 8px;
+    padding: 2px;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+.userName {
+    text-align: center;
+}
+
+.userDiv {
+    width: 80px;
+    margin-right: 20px;
+}
+
+.tagsSide {
+    border: 1px solid white;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;}
+}
+
+/*---------------------------------------------------------------------------------*/
+/*media style widgets*/
+/*---------------------------------------------------------------------------------*/
+@media (min-width: 500px) {
+    .widget {
+        width: 48.0%;
+    }
+
+}
+
+@media (min-width: 700px) {
+    .widget {
+        width: 31.3333333333333%;
+    }
+
+    .widget2 {
+        width: 48.0%;
+        margin-left: 25%;
+    }
+}
+
+@media (min-width: 980px) {
+    .widget {
+        width: 23.0%;
+    }
+}
+
+@media (min-width: 1199px) {
+    .widget {
+        width: 23.0%;
+    }
+}

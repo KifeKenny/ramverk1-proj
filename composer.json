@@ -1,0 +1,30 @@
+{
+    "name" : "anax/projeckt",
+    "description": "project kmom10",
+    "license": "MIT",
+    "authors": [
+            {
+                "name": "Kevin Olguin Jönsson",
+                "email": "kewin_256@hotmail.com"
+            }
+    ],
+    "require": {
+        "anax/request": "^1.0",
+        "anax/url": "^1.0",
+        "anax/router": "^1.0",
+        "anax/response": "^1.0",
+        "anax/view": "^1.0",
+        "anax/session": "^1.0",
+        "anax/configure": "^1.0",
+        "anax/textfilter": "^1.0",
+        "symfony/yaml": "^3.3",
+        "anax/di": "^1.0",
+        "anax/page": "^1.0",
+        "anax/database": "^1.1",
+        "anax/htmlform": "^1.0",
+        "kifekenny/comment": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {"Anax\\": "src/"}
+    }
+}
