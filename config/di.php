@@ -84,30 +84,6 @@ return [
                 return $obj;
             }
         ],
-        // "comment" => [
-        //     "shared" => true,
-        //     "callback" => function () {
-        //         $obj = new \Anax\Comment\Comment();
-        //         $obj->inject($this->get("session"));
-        //         return $obj;
-        //     }
-        // ],
-        // "comController" => [
-        //     "shared" => true,
-        //     "callback" => function () {
-        //         $obj = new \Anax\Comment\CommentController();
-        //         $obj->injects($this->get("comment"), $this->get("pageRender"));
-        //         return $obj;
-        //     }
-        // ],
-        // "comment2Controller" => [
-        //     "shared" => true,
-        //     "callback" => function () {
-        //         $obj = new \Kifekenny\Comment\Comment2Controller();
-        //         $obj->setDI($this);
-        //         return $obj;
-        //     }
-        // ],
         "flatFileContentController" => [
             "shared" => true,
             "callback" => function () {
@@ -138,7 +114,6 @@ return [
             "callback" => function () {
                 $obj = new \Anax\User\UserController();
                 $obj->setDI($this);
-                // $obj->startSession($this->get("session"));
                 return $obj;
             }
         ],
@@ -158,21 +133,13 @@ return [
                 return $obj;
             }
         ],
-        // "bookController" => [
-        //     "shared" => true,
-        //     "callback" => function () {
-        //         $obj = new \Anax\Book\BookController();
-        //         $obj->setDI($this);
-        //         return $obj;
-        //     }
-        // ],
-        // "Comment2Controller" => [
-        //     "shared" => true,
-        //     "callback" => function () {
-        //         $obj = new \Anax\Comment2\Comment2Controller();
-        //         $obj->setDI($this);
-        //         return $obj;
-        //     }
-        // ],
+        "Comment2Controller" => [
+            "shared" => true,
+            "callback" => function () {
+                $obj = new \Anax\Comment\Comment2Controller();
+                $obj->setDI($this);
+                return $obj;
+            }
+        ],
     ],
 ];

@@ -26,7 +26,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <?php
-        $all_url = ["about", "tags", "comment", "users"];
+        $all_url = ["about", "comment", "user", "question"];
 
         for ($i=0; $i < count($all_url); $i++) {
             $cur_url = $app->url->create($all_url[$i]);

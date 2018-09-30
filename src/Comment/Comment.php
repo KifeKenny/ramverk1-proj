@@ -1,18 +1,18 @@
 <?php
 
-namespace Anax\Question;
+namespace Anax\Comment;
 
 use \Anax\Database\ActiveRecordModel;
 
 /**
  * A database driven model.
  */
-class Question extends ActiveRecordModel
+class Comment extends ActiveRecordModel
 {
     /**
      * @var string $tableName name of the database table.
      */
-    protected $tableName = "ramverk1Projquestion";
+    protected $tableName = "ramverk1ProjComment";
 
     /**
      * Columns in the table.
@@ -20,10 +20,10 @@ class Question extends ActiveRecordModel
      * @var integer $id primary key auto incremented.
      */
     public $id;
-    public $title;
     public $content;
     public $created;
-    public $comments;
-    public $tagsId;
+    public $answers;
+    public $quesId;
+    public $comId;
     public $userId;
 }

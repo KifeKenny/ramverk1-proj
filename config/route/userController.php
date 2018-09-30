@@ -5,12 +5,18 @@
  // BookController
 return [
     "routes" => [
-        // [
-        //     "info" => "User Controller index.",
-        //     "requestMethod" => "get",
-        //     "path" => "profile",
-        //     "callable" => ["userController", "profile"],
-        // ],
+        [
+            "info" => "get all users",
+            "requestMethod" => "get",
+            "path" => "",
+            "callable" => ["userController", "getIndex"],
+        ],
+        [
+            "info" => "get user profile",
+            "requestMethod" => "get",
+            "path" => "profile/{id:digit}",
+            "callable" => ["userController", "getIndexUser"],
+        ],
         [
             "info" => "Login a user.",
             "requestMethod" => "get|post",

@@ -10,5 +10,17 @@ return [
             "path" => "",
             "callable" => ["questionController", "getIndex"],
         ],
+        [
+            "info" => "question comments index.",
+            "requestMethod" => "get",
+            "path" => "comments/{id:digit}",
+            "callable" => ["questionController", "getQuesComments"],
+        ],
+        [
+            "info" => "question comments index.",
+            "requestMethod" => "get",
+            "path" => "comment/answer/{id:digit}",
+            "callable" => ["questionController", "getComComments"],
+        ],
     ]
 ];

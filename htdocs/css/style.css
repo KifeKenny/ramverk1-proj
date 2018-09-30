@@ -109,6 +109,15 @@ output {
     float: right;
 }
 
+.fix {
+    overflow: auto;
+    /* clear: both; */
+}
+
+.white {
+    color: white;
+}
+
 .center {
     text-align: center;
 }
@@ -192,6 +201,14 @@ output {
     height: 200px;
 }
 
+.quesFull {
+    width: 100%;
+    border: 1px solid white;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
 .titleQuestion {
     overflow: auto;
     border-bottom: 1px solid white;
@@ -219,6 +236,18 @@ output {
 
 .tagsSide {
     border: 1px solid white;
+}
+
+.published {
+    float: left;
+    padding-top: 78px;
+}
+
+.block {
+    padding: 3%;
+    border: 5px solid white;
+    background-color: #191919f7;
+    margin-bottom: 10px;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */

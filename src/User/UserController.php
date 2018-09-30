@@ -7,6 +7,9 @@ use \Anax\Configure\ConfigureTrait;
 use \Anax\DI\InjectionAwareInterface;
 use \Anax\Di\InjectionAwareTrait;
 use \Anax\User\User;
+use \Anax\Question\Question;
+use \Anax\Question\Tags;
+use \Anax\Comment\Comment;
 use \Anax\User\HTMLForm\UserLoginForm;
 use \Anax\User\HTMLForm\CreateUserForm;
 use \Anax\User\HTMLForm\UserEditForm;
@@ -66,20 +69,102 @@ class UserController implements
      */
     public function getIndex()
     {
-        $title      = "A index page";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
+        $this->construct();
 
-        $data = [
-            "content" => "An index page",
-        ];
+        $user = new User();
 
-        $view->add("default2/article", $data);
+        $user->setDb($this->di->get("db"));
 
-        $pageRender->renderPage(["title" => $title]);
+        $user = $user->findAll();
+        $allUsers = [];
+        foreach ($user as $key) {
+            $question = new Question();
+            $question->setDb($this->di->get("db"));
+
+            $amount = $question->findAllWhere("userId = ?", $key->id);
+            $key->questions = count($amount);
+
+            $comment = new Comment();
+            $comment->setDb($this->di->get("db"));
+
+            $amount = $comment->findAllWhere("userId = ?", $key->id);
+            $key->comments = count($amount);
+        }
+
+        $data = [ "users" => $user, ];
+
+        $this->view->add("incl/header", ["title" => ["Book", "css/style.css", '../htdocs/img/pumpkin.jpg']]);
+        $this->view->add("incl/side-bar1");
+        $this->view->add("user/viewAll", $data);
+        $this->view->add("incl/side-bar2");
+        $this->view->add("incl/footer");
+
+        $this->pageRender->renderPage(["title" => "View | Users"]);
     }
 
+    //get user by id and display user post history
+    public function getIndexUser($id = null)
+    {
+        $this->construct();
+        $user = new User();
 
+        $user->setDb($this->di->get("db"));
+        $user = $user->findById($id);
+
+        if (!$user) { return; }
+
+        $allUsers = [];
+
+        $question = new Question();
+        $question->setDb($this->di->get("db"));
+
+        $questions = $question->findAllWhere("userId = ?", $user->id);
+        $user->questions = $questions;
+
+        foreach ($user->questions as $ques) {
+            $tags = new Tags();
+            $tags->setDb($this->di->get("db"));
+            $ques->tags = $tags->getNameById($ques->tagsId);
+        }
+
+        $comment = new Comment();
+        $comment->setDb($this->di->get("db"));
+
+        $comments = $comment->findAllWhere("userId = ?", $user->id);
+        $user->comments = $comments;
+
+        foreach ($user->comments as $com) {
+            $question = new Question();
+            $question->setDb($this->di->get("db"));
+            $com->comQue = $question->findById($com->quesId);
+            $temp = new User();
+            $temp->setDb($this->di->get("db"));
+            $com->comQue->user = $temp->findById($com->comQue->userId);
+
+
+            $com->comCom = false;
+            if ($com->comId != 0) {
+                $comment = new Comment();
+                $comment->setDb($this->di->get("db"));
+                $com->comCom = $comment->findById($com->comId);
+
+                $temp = new User();
+                $temp->setDb($this->di->get("db"));
+                $com->comCom->user = $temp->findById($com->comCom->userId);
+            }
+        }
+
+        $data = [ "users" => $user, ];
+
+        $val = ["", "../../css/style.css", '../../../htdocs/img/pumpkin.jpg'];
+        $this->view->add("incl/header", ["title" => $val]);
+        $this->view->add("incl/side-bar1");
+        $this->view->add("user/viewUser", $data);
+        $this->view->add("incl/side-bar2");
+        $this->view->add("incl/footer");
+
+        $this->pageRender->renderPage(["title" => "View | User"]);
+    }
 
     /**
      * Description.

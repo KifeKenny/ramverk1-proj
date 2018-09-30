@@ -21,4 +21,32 @@ class Tags extends ActiveRecordModel
      */
     public $id;
     public $name;
+
+
+    //take ids as ints, turn them into
+    public function getNameById($ids) {
+
+        $tagsArr = array_map('intval', str_split($ids));
+        $result = [];
+        for ($i=0; $i < count($tagsArr); $i++) {
+            $temp = $this->findById($tagsArr[$i]);
+            array_push($result, $temp->name);
+        }
+
+        return $result;
+    }
+
+    //take ids as ints, turn them into
+    public function getIdByName($name) {
+
+        $result = [];
+        $temp = $this->findAll();
+        foreach ($temp as $key) {
+            if ($key->name == $name) {
+                return $key->id;
+            }
+        }
+
+        return false;
+    }
 }
