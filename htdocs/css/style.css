@@ -16,7 +16,7 @@ p, h1 {
     color: white;
 }
 
-input[type=text], select, input[type=password] {
+input[type=text], input[type=number], select, input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -25,6 +25,19 @@ input[type=text], select, input[type=password] {
     border-radius: 4px;
     box-sizing: border-box;
     color: black;
+}
+
+
+textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: black;
+    height: 200px;
 }
 
 input[type=submit] {

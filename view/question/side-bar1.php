@@ -16,7 +16,7 @@ foreach ($tags as $tag) {
     echo '<p> <a href="?tag=' . $tag->id . '&name=' . $tag->name . '">' . $tag->name . '</a></p>';
 }
 
- ?>
+    ?>
     </div>
 </div>
 

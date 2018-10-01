@@ -12,15 +12,15 @@ $qUrl = $app->url->create("question/comments/" . $question->id);
 
 <div class="block">
 
-<div class="question" style="border-color:yellow;height:150px;width:50%;">
+<div class="question fix" style="border-color:yellow;height:150px;width:50%;">
     <div class="titleQuestion" style="border-bottom-color:yellow;height:110px;">
         <div class="userDiv left">
-            <img class="quesImg" src="<?=$app->get_gravatar($question->user->mail, 80)?>">
+            <img class="quesImg" src="<?=$app->getGravatar($question->user->mail, 80)?>">
             <p class="userName"><?=$question->user->username?></p>
 
         </div>
         <h3 class="title">
-            <a href="<?=$app->url->create("question/comments/" . $question->user->id)?>">
+            <a href="<?=$app->url->create("question/comments/" . $question->id)?>">
                 <?=$question->title?>
             </a>
         </h3>
@@ -29,15 +29,17 @@ $qUrl = $app->url->create("question/comments/" . $question->id);
         </p>
     </div>
 
-    <p class="content"><?=$question->content?></p>
+    <p class="content">
+        <?=$di->get("textfilter")->parse($question->content, ["markdown"])->text?>
+    </p>
 </div>
 <p><strong>Main question ↗ </strong></p>
 
-<?php if ($comments->comCom): ?>
-    <div class="question" style="border-color:green;height:150px;width:50%;">
+<?php if ($comments->comCom) : ?>
+    <div class="question fix" style="border-color:green;height:150px;width:50%;">
         <div class="titleQuestion" style="border-bottom-color: green;height:110px;">
             <div class="userDiv left">
-                <img class="quesImg" src="<?=$app->get_gravatar($comments->comCom->user->mail, 80)?>">
+                <img class="quesImg" src="<?=$app->getGravatar($comments->comCom->user->mail, 80)?>">
                 <p class="userName"><?=$comments->comCom->user->username?></p>
             </div>
             <p class="published" style="padding-top: 45px">
@@ -51,7 +53,9 @@ $qUrl = $app->url->create("question/comments/" . $question->id);
             </p>
         </div>
 
-        <p class="content"><?=$comments->comCom->content?></p>
+        <p class="content">
+            <?=$di->get("textfilter")->parse($comments->comCom->content, ["markdown"])->text?>
+        </p>
     </div>
     <p><strong>Comment for ↗ </strong></p>
 <?php endif; ?>
@@ -59,14 +63,24 @@ $qUrl = $app->url->create("question/comments/" . $question->id);
 <div class="quesFull">
     <div class="titleQuestion">
         <div class="userDiv left">
-            <img class="quesImg" src="<?=$app->get_gravatar($mainUser->mail, 80)?>">
+            <img class="quesImg" src="<?=$app->getGravatar($mainUser->mail, 80)?>">
             <p class="userName"><?=$mainUser->username?></p>
         </div>
         <div class="fix">
         </div>
         <p class="published"><em>Published: <?=$comment->created?></em></p>
+
+        <p class="right" style="padding-top:75px">
+            <strong>
+            <a href="<?=$app->url->create('create/' . $comment->id . "/1")?>">
+                Comment >>>
+            </a>
+            </strong>
+        </p>
     </div>
-    <p class="content"><?=$comment->content?></p>
+    <p class="content">
+        <?=$di->get("textfilter")->parse($comment->content, ["markdown"])->text?>
+    </p>
 </div>
 
 </div>
@@ -74,11 +88,11 @@ $qUrl = $app->url->create("question/comments/" . $question->id);
 <h3 class="white"> Answers &#8595;</h3>
 
 
-<?php foreach ($allComments as $com): ?>
-    <div class="quesFull">
+<?php foreach ($allComments as $com) : ?>
+    <div class="quesFull fix">
         <div class="titleQuestion">
             <div class="userDiv left">
-                <img class="quesImg" src="<?=$app->get_gravatar($com->user->mail, 80)?>">
+                <img class="quesImg" src="<?=$app->getGravatar($com->user->mail, 80)?>">
                 <p class="userName"><?=$com->user->username?></p>
             </div>
             <p class="published" style="padding-top: 75px">
@@ -92,6 +106,6 @@ $qUrl = $app->url->create("question/comments/" . $question->id);
             </p>
         </div>
 
-        <p class="content"><?=$com->content?></p>
+        <p class="content"><?=$di->get("textfilter")->parse($com->content, ["markdown"])->text?></p>
     </div>
 <?php endforeach; ?>

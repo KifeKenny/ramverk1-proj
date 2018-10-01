@@ -11,8 +11,7 @@ $user  = isset($users) ? $users : null;
 
 <?php
 for ($i=0; $i < count($user); $i++) {
-
-    $userImg = $app->get_gravatar($user[$i]->mail, 80);
+    $userImg = $app->getGravatar($user[$i]->mail, 80);
 
     $content = '<div class="question">';
     $content .= '<div class="titleQuestion">';

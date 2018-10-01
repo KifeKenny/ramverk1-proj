@@ -2,23 +2,21 @@
 
 namespace Anax\View;
 
-
 $user  = isset($users) ? $users : null;
-
 
 ?>
 
-<img style="margin-right: 5px" class="left" src="<?=$app->get_gravatar($user->mail, 80)?>">
+<img style="margin-right: 5px" class="left" src="<?=$app->getGravatar($user->mail, 80)?>">
 <h1><?=$user->username?></h1>
 <br>
 <hr>
 
 <h3 class="white"> Posted questions &#8595;</h3>
-<?php foreach ($user->questions as $que): ?>
+<?php foreach ($user->questions as $que) : ?>
     <div class="question">
         <div class="titleQuestion">
             <div class="userDiv left">
-                <img class="quesImg" src="<?=$app->get_gravatar($user->mail, 80)?>">
+                <img class="quesImg" src="<?=$app->getGravatar($user->mail, 80)?>">
                 <p class="userName"><?=$user->username?></p>
             </div>
 
@@ -31,7 +29,7 @@ $user  = isset($users) ? $users : null;
             <div class="fix">
             <?php
             for ($i=0; $i < count($que->tags); $i++) {
-                echo '<p class="tagUnder"><strong>' . $que->tags[$i] . '</strong></p>';;
+                echo '<p class="tagUnder"><strong>' . $que->tags[$i] . '</strong></p>';
             }
             ?>
             </div>
@@ -43,14 +41,14 @@ $user  = isset($users) ? $users : null;
 
 <h3 class="white"> Posted comments &#8595;</h3>
 
-<?php foreach ($user->comments as $com): ?>
+<?php foreach ($user->comments as $com) : ?>
     <div class="block">
 
-    <?php if ($com->comQue): ?>
+    <?php if ($com->comQue) : ?>
         <div class="question" style="border-color:yellow;height:150px;width:50%;">
             <div class="titleQuestion" style="border-bottom-color:yellow;height:110px;">
                 <div class="userDiv left">
-                    <img class="quesImg" src="<?=$app->get_gravatar($com->comQue->user->mail, 80)?>">
+                    <img class="quesImg" src="<?=$app->getGravatar($com->comQue->user->mail, 80)?>">
                     <p class="userName"><?=$com->comQue->user->username?></p>
 
                 </div>
@@ -69,11 +67,11 @@ $user  = isset($users) ? $users : null;
         <p><strong>Main question ↗ </strong></p>
     <?php endif; ?>
 
-    <?php if ($com->comCom): ?>
+    <?php if ($com->comCom) : ?>
         <div class="question" style="border-color:green;height:150px;width:50%;">
             <div class="titleQuestion" style="border-bottom-color: green;height:110px;">
                 <div class="userDiv left">
-                    <img class="quesImg" src="<?=$app->get_gravatar($com->comCom->user->mail, 80)?>">
+                    <img class="quesImg" src="<?=$app->getGravatar($com->comCom->user->mail, 80)?>">
                     <p class="userName"><?=$com->comCom->user->username?></p>
                 </div>
                 <p class="published" style="padding-top: 45px">
@@ -95,7 +93,7 @@ $user  = isset($users) ? $users : null;
     <div class="question" style="border-width:5px;">
         <div class="titleQuestion">
             <div class="userDiv left">
-                <img class="quesImg" src="<?=$app->get_gravatar($user->mail, 80)?>">
+                <img class="quesImg" src="<?=$app->getGravatar($user->mail, 80)?>">
                 <p class="userName"><?=$user->username?></p>
             </div>
             <p class="published"><em>Published: <?=$que->created?></em></p>

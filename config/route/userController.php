@@ -35,23 +35,11 @@ return [
             "path" => "logout",
             "callable" => ["userController", "logoutUser"],
         ],
-        // [
-        //     "info" => "Edit profile",
-        //     "requestMethod" => "get|post",
-        //     "path" => "edit/{id:digit}",
-        //     "callable" => ["userController", "editProfile"],
-        // ],
-        // [
-        //     "info" => "get all profiles profile",
-        //     "requestMethod" => "get",
-        //     "path" => "admin/profiles",
-        //     "callable" => ["userController", "adminIndex"],
-        // ],
-        // [
-        //     "info" => "get profile delete page",
-        //     "requestMethod" => "get|post",
-        //     "path" => "admin/delete/{id:digit}",
-        //     "callable" => ["userController", "adminDelete"],
-        // ],
+        [
+            "info" => "Edit profile",
+            "requestMethod" => "get|post",
+            "path" => "edit",
+            "callable" => ["userController", "editProfile"],
+        ],
     ]
 ];

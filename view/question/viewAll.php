@@ -4,30 +4,38 @@ namespace Anax\View;
 
 $setTag  = isset($_GET['tag']) ? $_GET['tag'] : null;
 $tagName = isset($_GET['name']) ? $_GET['name'] : null;
-
-// var_dump($tag);
-
-echo "<h1>Questions</h1><hr>";
-
-if ($tagName) {
-    echo '<div class="fix"><p class="tagUnder"><strong>' . $tagName . '</strong></p></div>';
-}
-
-// Gather incoming variables and use default values if not set
 $items = isset($items) ? $items : null;
 $tags  = isset($tags) ? $tags : null;
 $user  = isset($user) ? $user : null;
 
-foreach ($items as $item) {
+?>
 
+<h1>Questions</h1>
+<hr>
+
+<p>
+    <a href="<?=$app->url->create("question/create")?>">Create a question>>> </a>
+</p>
+
+
+<?php
+if ($tagName) {
+    echo '<div class="fix"><p class="tagUnder"><strong>' . $tagName . '</strong></p></div>';
+}
+?>
+
+
+
+<?php
+
+foreach ($items as $item) {
     $arTemp       = array_map('intval', str_split($item->tagsId));
     $commentTags  = [];
     $tagOk        = 0;
     foreach ($tags as $tag) {
         for ($i=0; $i < count($arTemp); $i++) {
-            if($arTemp[$i] == $tag->id) {
+            if ($arTemp[$i] == $tag->id) {
                 array_push($commentTags, $tag->name);
-
                 if ($setTag == $tag->id || $setTag == null) {
                     $tagOk = 1;
                 }
@@ -47,9 +55,9 @@ foreach ($items as $item) {
         }
     }
 
-    $userImg = $app->get_gravatar($tempUser->mail, 80);
+    $userImg = $app->getGravatar($tempUser->mail, 80);
 
-    $content = '<div class="question">';
+    $content = '<div class="question fix">';
 
     $content .= '<div class="titleQuestion">';
     $content .= '<div class="userDiv left"> <img class="quesImg" src="' . $userImg . '">';
@@ -64,9 +72,8 @@ foreach ($items as $item) {
     $content .= '<p class="right"> Answers:' . $item->comments . '</p>';
     $content .= '</div>';
 
-
-
-    $content .= '<p class="content">' . $item->content . '</p></div>';
+    $mark = $di->get("textfilter")->parse($item->content, ["markdown"]);
+    $content .= '<p class="content">' . $mark->text . '</p></div>';
 
     echo $content;
 }

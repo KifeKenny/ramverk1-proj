@@ -133,13 +133,5 @@ return [
                 return $obj;
             }
         ],
-        "Comment2Controller" => [
-            "shared" => true,
-            "callback" => function () {
-                $obj = new \Anax\Comment\Comment2Controller();
-                $obj->setDI($this);
-                return $obj;
-            }
-        ],
     ],
 ];

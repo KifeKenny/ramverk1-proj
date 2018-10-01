@@ -111,7 +111,9 @@ class UserController implements
         $user->setDb($this->di->get("db"));
         $user = $user->findById($id);
 
-        if (!$user) { return; }
+        if (!$user) {
+            return;
+        }
 
         $allUsers = [];
 
@@ -246,44 +248,14 @@ class UserController implements
         $this->di->get("response")->redirect("");
     }
 
-    public function profile()
+    public function editProfile()
     {
-        $loginInfo = $this->checkLogin();
-        if (!$loginInfo["user"]) {
+        $this->construct();
+        if (!$this->session->get('user_id')) {
             $this->di->get("response")->redirect("");
         }
 
-        $title      = "profile";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
-        $user = new User();
-        $user->setDb($this->di->get("db"));
-
-        $userInfo = $user->valueExist($loginInfo["user"], true);
-
-        $view->add("incl/header", ["title" => ["Book", "../css/style.css"]]);
-        $view->add("incl/side-bar1");
-        $view->add("user/profile", ["userInfo" => $userInfo]);
-        if ($loginInfo["user"] == "admin") {
-            $view->add("user/admin");
-        }
-        $view->add("incl/side-bar2");
-        $view->add("incl/footer");
-
-        $pageRender->renderPage(["title" => $title]);
-    }
-
-    public function editProfile($id)
-    {
-        $loginInfo = $this->checkLogin();
-        if (!$loginInfo["user"]) {
-            $this->di->get("response")->redirect("");
-        }
-
-        $title      = "Profile | Edit";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
-        $form       = new UserEditForm($this->di, $id);
+        $form = new UserEditForm($this->di);
 
         $form->check();
 
@@ -291,53 +263,12 @@ class UserController implements
             "content" => $form->getHTML(),
         ];
 
-        $view->add("incl/header", ["title" => ["Book", "../../css/style.css"]]);
-        $view->add("incl/side-bar1");
-        $view->add("default2/article", $data);
-        $view->add("incl/side-bar2");
-        $view->add("incl/footer");
+        $this->view->add("incl/header", ["title" => ["", "../css/style.css", "../../htdocs/img/pumpkin.jpg"]]);
+        $this->view->add("incl/side-bar1");
+        $this->view->add("default/article", $data);
+        $this->view->add("incl/side-bar2");
+        $this->view->add("incl/footer");
 
-        $pageRender->renderPage(["title" => $title]);
-    }
-
-    public function adminIndex()
-    {
-        $loginInfo = $this->checkLogin();
-        if ($loginInfo["user"] != "admin") {
-            $this->di->get("response")->redirect("");
-        }
-
-        $title      = "Admin | profiles";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
-        $user = new User();
-        $user->setDb($this->di->get("db"));
-
-        $data = [
-            "items" => $user->findAll(),
-        ];
-
-
-        $view->add("incl/header", ["title" => ["Admin", "css/style.css"]]);
-        $view->add("incl/side-bar1");
-        $view->add("admin/view-all", $data);
-        $view->add("incl/side-bar2");
-        $view->add("incl/footer");
-
-        $pageRender->renderPage(["title" => $title]);
-    }
-
-    public function adminDelete($id)
-    {
-        $loginInfo = $this->checkLogin();
-        if ($loginInfo["user"] != "admin") {
-            $this->di->get("response")->redirect("");
-        }
-
-        $user = new user();
-        $user->setDb($this->di->get("db"));
-        $user->find("id", $id);
-        $user->delete();
-        $this->di->get("response")->redirect("user/admin/profiles");
+        $this->pageRender->renderPage(["title" => "User | Edit"]);
     }
 }

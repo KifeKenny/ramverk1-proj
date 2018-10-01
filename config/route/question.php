@@ -22,5 +22,11 @@ return [
             "path" => "comment/answer/{id:digit}",
             "callable" => ["questionController", "getComComments"],
         ],
+        [
+            "info" => "create question",
+            "requestMethod" => "get|post",
+            "path" => "create",
+            "callable" => ["questionController", "question2Create"],
+        ],
     ]
 ];

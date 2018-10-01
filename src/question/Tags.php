@@ -22,10 +22,9 @@ class Tags extends ActiveRecordModel
     public $id;
     public $name;
 
-
     //take ids as ints, turn them into
-    public function getNameById($ids) {
-
+    public function getNameById($ids)
+    {
         $tagsArr = array_map('intval', str_split($ids));
         $result = [];
         for ($i=0; $i < count($tagsArr); $i++) {
@@ -37,8 +36,8 @@ class Tags extends ActiveRecordModel
     }
 
     //take ids as ints, turn them into
-    public function getIdByName($name) {
-
+    public function getIdByName($name)
+    {
         $result = [];
         $temp = $this->findAll();
         foreach ($temp as $key) {
@@ -46,7 +45,6 @@ class Tags extends ActiveRecordModel
                 return $key->id;
             }
         }
-
         return false;
     }
 }

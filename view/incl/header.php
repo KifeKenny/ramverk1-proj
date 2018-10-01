@@ -26,7 +26,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <?php
-        $all_url = ["about", "comment", "user", "question"];
+        $all_url = ["about", "user", "question"];
 
         for ($i=0; $i < count($all_url); $i++) {
             $cur_url = $app->url->create($all_url[$i]);
@@ -35,11 +35,11 @@
         $session = $di->get("session");
         $cur_user = $session->get("current_user");
         $login_url = $app->url->create("user/logout");
-        $profile_url = $app->url->create("user/profile");
+        $profile_url = $app->url->create("user/profile/" . $session->get('user_id'));
         $login_name = "Logout";
 
         $user_mail  = $session->get('user_mail');
-        $user_img  = $app->get_gravatar($user_mail);
+        $user_img  = $app->getGravatar($user_mail);
 
         if (!$cur_user) {
             $login_name = "Login";
@@ -55,6 +55,10 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li><a href="<?=$profile_url?>"><?=$cur_user?></a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="<?=$app->url->create("user/edit")?>">Edit</a></li>
         </ul>
 
     <?php endif; ?>

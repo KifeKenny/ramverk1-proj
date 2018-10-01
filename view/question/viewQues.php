@@ -13,10 +13,10 @@ $comments  = isset($comments) ? $comments : null;
 <h1>Question</h1>
 <hr>
 
-<div class="quesFull">
+<div class="quesFull fix">
     <div class="titleQuestion">
         <div class="userDiv left">
-            <img class="quesImg" src="<?=$app->get_gravatar($mainUser->mail, 80)?>">
+            <img class="quesImg" src="<?=$app->getGravatar($mainUser->mail, 80)?>">
             <p class="userName"><?=$mainUser->username?></p>
         </div>
 
@@ -24,17 +24,24 @@ $comments  = isset($comments) ? $comments : null;
         <div class="fix">
         <?php
         for ($i=0; $i < count($tags); $i++) {
-            echo '<p class="tagUnder"><strong>' . $tags[$i]->name . '</strong></p>';;
+            echo '<p class="tagUnder"><strong>' . $tags[$i]->name . '</strong></p>';
         }
         ?>
         </div>
         <p><em>Published: <?=$question->created?></em></p>
+        <p class="right">
+            <a href="<?=$app->url->create('create/' . $question->id . '/2')?>">
+                Comment >>>
+            </a>
+        </p>
     </div>
-    <p class="content"><?=$question->content?></p>
+    <p class="content">
+        <?=$di->get("textfilter")->parse($question->content, ["markdown"])->text?>
+    </p>
 </div>
 
 <h3 class="white"> Answers &#8595;</h3>
-<?php foreach ($comments as $comment): ?>
+<?php foreach ($comments as $comment) : ?>
 
     <?php
     if ($comment->comId != 0) {
@@ -48,11 +55,11 @@ $comments  = isset($comments) ? $comments : null;
             continue;
         }
     }
-     ?>
+        ?>
         <div class="quesFull">
             <div class="titleQuestion">
             <div class="userDiv left">
-                <img class="quesImg" src="<?=$app->get_gravatar($tempUser->mail, 80)?>">
+                <img class="quesImg" src="<?=$app->getGravatar($tempUser->mail, 80)?>">
                 <p class="userName"><?=$tempUser->username?></p>
             </div>
             <p class="published" style="padding-top: 75px">
@@ -66,6 +73,6 @@ $comments  = isset($comments) ? $comments : null;
             </p>
         </div>
 
-        <p class="content"><?=$comment->content?></p>
+        <p class="content"><?=$di->get("textfilter")->parse($comment->content, ["markdown"])->text?></p>
     </div>
 <?php endforeach; ?>
