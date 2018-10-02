@@ -76,7 +76,6 @@ class UserController implements
         $user->setDb($this->di->get("db"));
 
         $user = $user->findAll();
-        $allUsers = [];
         foreach ($user as $key) {
             $question = new Question();
             $question->setDb($this->di->get("db"));
@@ -115,7 +114,7 @@ class UserController implements
             return;
         }
 
-        $allUsers = [];
+        // $allUsers = [];
 
         $question = new Question();
         $question->setDb($this->di->get("db"));

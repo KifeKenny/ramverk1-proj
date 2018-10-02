@@ -32,7 +32,7 @@ $answer = isset($answer) ? $answer : null;
         <p><em>Published: <?=$answer->created?></em></p>
     </div>
     <p class="content">
-        <?=$di->get("textfilter")->parse($answer->content, ["markdown"]->text?>
+        <?=$di->get("textfilter")->parse($answer->content, ["markdown"])->text?>
     </p>
 </div>
 

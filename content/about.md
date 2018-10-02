@@ -8,7 +8,7 @@ som beskrivs i denna länken [krav :)](https://dbwebb.se/kurser/ramverk1-v1/kmom
 
 
 
-Denna sidans finns på [Github](https://dbwebb.se/kurser/ramverk1-v1/kmom10). Där beskrivs
+Denna sidans finns på [Github](https://github.com/KifeKenny/ramverk1-proj). Där beskrivs
 vad du ska göra om du vill sätta upp denna sidan själv och vilka programm jag använder
 för att mäta kodstandar, tester, osv.
 

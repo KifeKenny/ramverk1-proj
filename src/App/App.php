@@ -38,11 +38,11 @@ class App
         exit;
     }
 
-    function getGravatar($email, $s = 50, $d = 'mp', $r = 'g', $img = false, $atts = array())
+    public function getGravatar($email, $siz = 50, $dic = 'mp', $ram = 'g', $img = false, $atts = array())
     {
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($email)));
-        $url .= "?s=$s&d=$d&r=$r";
+        $url .= "?s=$siz&d=$dic&r=$ram";
         if ($img) {
             $url = '<img src="' . $url . '"';
             foreach ($atts as $key => $val) {

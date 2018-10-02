@@ -1,6 +1,7 @@
 SET NAMES utf8;
 
 use ramverk1Proj;
+-- use kejo15;
 
 DROP TABLE IF EXISTS `ramverk1ProjComment`;
 DROP TABLE IF EXISTS `ramverk1ProjTags`;

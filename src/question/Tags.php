@@ -38,7 +38,6 @@ class Tags extends ActiveRecordModel
     //take ids as ints, turn them into
     public function getIdByName($name)
     {
-        $result = [];
         $temp = $this->findAll();
         foreach ($temp as $key) {
             if ($key->name == $name) {

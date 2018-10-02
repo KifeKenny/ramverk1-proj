@@ -55,6 +55,27 @@ class Question2Controller implements
         $this->user->setDb($this->di->get("db"));
     }
 
+    public function avoidValidationError($temp)
+    {
+        $allUsers = [];
+        $counter = 0;
+        foreach ($temp as $userId => $value) {
+            $counter += 1;
+            $user = new User();
+            $user->setDb($this->di->get("db"));
+            $user = $user->findById($userId);
+            $user->questions = $value;
+
+            array_push($allUsers, $user);
+
+            if ($counter == 4) {
+                break;
+            }
+        }
+
+        return $allUsers;
+    }
+
     //get quesion based by id and all its user and tag obj
     public function getquestion($id)
     {
@@ -281,21 +302,7 @@ class Question2Controller implements
 
         arsort($temp);
 
-        $allUsers = [];
-        $counter = 0;
-        foreach ($temp as $userId => $value) {
-            $counter += 1;
-            $user = new User();
-            $user->setDb($this->di->get("db"));
-            $user = $user->findById($userId);
-            $user->questions = $value;
-
-            array_push($allUsers, $user);
-
-            if ($counter == 4) {
-                break;
-            }
-        }
+        $allUsers = $this->avoidValidationError($temp);
 
         $data = [
             "questions" => $nque,

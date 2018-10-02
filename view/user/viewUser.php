@@ -13,7 +13,7 @@ $user  = isset($users) ? $users : null;
 
 <h3 class="white"> Posted questions &#8595;</h3>
 <?php foreach ($user->questions as $que) : ?>
-    <div class="question">
+    <div class="question fix">
         <div class="titleQuestion">
             <div class="userDiv left">
                 <img class="quesImg" src="<?=$app->getGravatar($user->mail, 80)?>">
@@ -35,7 +35,9 @@ $user  = isset($users) ? $users : null;
             </div>
             <p><em>Published: <?=$que->created?></em></p>
         </div>
-        <p class="content"><?=$que->content?></p>
+        <p class="content">
+            <?=$di->get("textfilter")->parse($que->content, ["markdown"])->text?>
+        </p>
     </div>
 <?php endforeach; ?>
 
@@ -45,7 +47,7 @@ $user  = isset($users) ? $users : null;
     <div class="block">
 
     <?php if ($com->comQue) : ?>
-        <div class="question" style="border-color:yellow;height:150px;width:50%;">
+        <div class="question fix" style="border-color:yellow;height:150px;width:50%;">
             <div class="titleQuestion" style="border-bottom-color:yellow;height:110px;">
                 <div class="userDiv left">
                     <img class="quesImg" src="<?=$app->getGravatar($com->comQue->user->mail, 80)?>">
@@ -62,13 +64,15 @@ $user  = isset($users) ? $users : null;
                 </p>
             </div>
 
-            <p class="content"><?=$com->comQue->content?></p>
+            <p class="content">
+                <?=$di->get("textfilter")->parse($com->comQue->content, ["markdown"])->text?>
+            </p>
         </div>
         <p><strong>Main question ↗ </strong></p>
     <?php endif; ?>
 
     <?php if ($com->comCom) : ?>
-        <div class="question" style="border-color:green;height:150px;width:50%;">
+        <div class="question fix" style="border-color:green;height:150px;width:50%;">
             <div class="titleQuestion" style="border-bottom-color: green;height:110px;">
                 <div class="userDiv left">
                     <img class="quesImg" src="<?=$app->getGravatar($com->comCom->user->mail, 80)?>">
@@ -85,12 +89,14 @@ $user  = isset($users) ? $users : null;
                 </p>
             </div>
 
-            <p class="content"><?=$com->comCom->content?></p>
+            <p class="content">
+                <?=$di->get("textfilter")->parse($com->comCom->content, ["markdown"])->text?>
+            </p>
         </div>
         <p><strong>Comment for comment ↗ </strong></p>
     <?php endif; ?>
 
-    <div class="question" style="border-width:5px;">
+    <div class="question fix" style="border-width:5px;">
         <div class="titleQuestion">
             <div class="userDiv left">
                 <img class="quesImg" src="<?=$app->getGravatar($user->mail, 80)?>">
@@ -104,8 +110,9 @@ $user  = isset($users) ? $users : null;
                 </a>
             </p>
         </div>
-
-        <p class="content"><?=$com->content?></p>
+        <p class="content">
+            <?=$di->get("textfilter")->parse($com->content, ["markdown"])->text?>
+        </p>
     </div>
 
     </div>
